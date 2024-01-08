@@ -27,7 +27,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   <arg name="angle_start" default="-2.398082392240209" />
 
   <!-- End angle of measurement in radian -->
-
   <arg name="angle_end" default="2.398082392240209" />
 
   <!-- Publishing of intensities -->
@@ -67,7 +66,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
   <!-- Publish tf frames for the device -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" exec="robot_state_publisher">
-    <param name="robot_description" value="$(command 'xacro $(find-pkg-share psen_scan_v2)/urdf/example.urdf.xacro prefix:=$(var tf_prefix)')" />
+    <param name="robot_description" value="$(command 'xacro $(find-pkg-share psen_scan_v2)/urdf/main.urdf.xacro prefix:=$(var tf_prefix)')" />
   </node>
 
   <!-- Start rviz -->
