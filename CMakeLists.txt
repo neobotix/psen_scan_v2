@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 3.10)
 project(psen_scan_v2)
 
 add_compile_options(-std=c++14)
@@ -30,12 +30,31 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rcutils REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(visualization_msgs REQUIRED)
 find_package(Boost 1.69)
 if(NOT Boost_FOUND)
   find_package(Boost REQUIRED COMPONENTS system filesystem)
 endif()
 find_package(console_bridge REQUIRED)
 find_package(fmt REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+
+set(msg_files
+  "msg/InputPinState.msg"
+  "msg/InputPinID.msg"
+  "msg/OutputPinState.msg"
+  "msg/OutputPinID.msg"
+  "msg/IOState.msg"
+)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  ${msg_files}
+  DEPENDENCIES sensor_msgs std_msgs geometry_msgs visualization_msgs
+)
+
+ament_export_dependencies(rosidl_default_runtime)
 
 ################
 ## Clang tidy ##
@@ -81,7 +100,8 @@ set(${PROJECT_NAME}_standalone_sources
   standalone/src/data_conversion_layer/scanner_reply_serialization_deserialization.cpp
 )
 
-add_library(${PROJECT_NAME}_standalone
+add_library(
+  ${PROJECT_NAME}_standalone
   ${${PROJECT_NAME}_standalone_sources}
 )
 target_compile_definitions(${PROJECT_NAME}_standalone
@@ -111,14 +131,18 @@ set(${PROJECT_NAME}_node_sources
 add_executable(${PROJECT_NAME}_node
   ${${PROJECT_NAME}_node_sources}
 )
+
 target_include_directories(${PROJECT_NAME}_node
   PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
+
 target_link_libraries(${PROJECT_NAME}_node
   ${PROJECT_NAME}_standalone
+  fmt::fmt
 )
+
 ament_target_dependencies(${PROJECT_NAME}_node
   rclcpp
   sensor_msgs
@@ -128,8 +152,8 @@ ament_target_dependencies(${PROJECT_NAME}_node
 ## Install ##
 #############
 
-install(DIRECTORY include/ standalone/include/
-  DESTINATION include
+install(DIRECTORY include/${PROJECT_NAME}/ standalone/include/${PROJECT_NAME}_standalone/
+  DESTINATION include/${PROJECT_NAME}
   FILES_MATCHING PATTERN "*.h"
   PATTERN ".svn" EXCLUDE
 )
@@ -141,8 +165,13 @@ install(DIRECTORY urdf DESTINATION share/${PROJECT_NAME})
 install(TARGETS
   ${PROJECT_NAME}_node
   ${PROJECT_NAME}_standalone
-  DESTINATION lib/${PROJECT_NAME}
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
+
+rosidl_target_interfaces(${PROJECT_NAME}_node
+  ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 ############
 ##  Test  ##
