@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.7)
 project(psen_scan_v2)
 
 add_compile_options(-std=c++14)
@@ -39,6 +39,7 @@ if(NOT Boost_FOUND)
 endif()
 find_package(console_bridge REQUIRED)
 find_package(fmt REQUIRED)
+find_library(TINYXML2_LIB tinyxml2)
 find_package(rosidl_default_generators REQUIRED)
 
 set(msg_files
@@ -47,6 +48,8 @@ set(msg_files
   "msg/OutputPinState.msg"
   "msg/OutputPinID.msg"
   "msg/IOState.msg"
+  "msg/ZoneSet.msg"
+  "msg/ZoneSetConfiguration.msg"
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
@@ -120,6 +123,18 @@ ament_target_dependencies(${PROJECT_NAME}_standalone
   rcutils
 )
 
+add_library(
+  ${PROJECT_NAME}_standalone_xml_configuration_import
+  standalone/src/configuration/xml_configuration_parsing.cpp
+)
+
+target_link_libraries(${PROJECT_NAME}_standalone_xml_configuration_import
+  ${console_bridge_LIBRARIES}
+  ${TINYXML2_LIB}
+  fmt::fmt
+)
+target_include_directories(${PROJECT_NAME}_standalone_xml_configuration_import PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
 ###########
 ## Build ##
 ###########
@@ -148,6 +163,25 @@ ament_target_dependencies(${PROJECT_NAME}_node
   sensor_msgs
 )
 
+add_executable(config_server_node
+  src/config_server_node_main.cpp
+  src/config_server_node.cpp)
+
+target_link_libraries(config_server_node
+  ${PROJECT_NAME}_standalone_xml_configuration_import
+)
+
+target_include_directories(config_server_node
+  PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
+ament_target_dependencies(config_server_node
+  rclcpp
+)
+
+
 #############
 ## Install ##
 #############
@@ -165,12 +199,17 @@ install(DIRECTORY urdf DESTINATION share/${PROJECT_NAME})
 install(TARGETS
   ${PROJECT_NAME}_node
   ${PROJECT_NAME}_standalone
+  config_server_node
+  ${PROJECT_NAME}_standalone_xml_configuration_import
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
 
 rosidl_target_interfaces(${PROJECT_NAME}_node
+  ${PROJECT_NAME} "rosidl_typesupport_cpp")
+
+rosidl_target_interfaces(config_server_node
   ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 ############

@@ -78,27 +78,27 @@ public:
   std::vector<unsigned long> warn2_;
   std::vector<unsigned long> muting1_;
   std::vector<unsigned long> muting2_;
-  std::vector<unsigned long> safety1_Sub0_;
-  std::vector<unsigned long> safety2_Sub0_;
-  std::vector<unsigned long> safety3_Sub0_;
-  std::vector<unsigned long> warn1_Sub0_;
-  std::vector<unsigned long> warn2_Sub0_;
-  std::vector<unsigned long> muting1_Sub0_;
-  std::vector<unsigned long> muting2_Sub0_;
-  std::vector<unsigned long> safety1_Sub1_;
-  std::vector<unsigned long> safety2_Sub1_;
-  std::vector<unsigned long> safety3_Sub1_;
-  std::vector<unsigned long> warn1_Sub1_;
-  std::vector<unsigned long> warn2_Sub1_;
-  std::vector<unsigned long> muting1_Sub1_;
-  std::vector<unsigned long> muting2_Sub1_;
-  std::vector<unsigned long> safety1_Sub2_;
-  std::vector<unsigned long> safety2_Sub2_;
-  std::vector<unsigned long> safety3_Sub2_;
-  std::vector<unsigned long> warn1_Sub2_;
-  std::vector<unsigned long> warn2_Sub2_;
-  std::vector<unsigned long> muting1_Sub2_;
-  std::vector<unsigned long> muting2_Sub2_;
+  std::vector<unsigned long> safety1_sub0_;
+  std::vector<unsigned long> safety2_sub0_;
+  std::vector<unsigned long> safety3_sub0_;
+  std::vector<unsigned long> warn1_sub0_;
+  std::vector<unsigned long> warn2_sub0_;
+  std::vector<unsigned long> muting1_sub0_;
+  std::vector<unsigned long> muting2_sub0_;
+  std::vector<unsigned long> safety1_sub1_;
+  std::vector<unsigned long> safety2_sub1_;
+  std::vector<unsigned long> safety3_sub1_;
+  std::vector<unsigned long> warn1_sub1_;
+  std::vector<unsigned long> warn2_sub1_;
+  std::vector<unsigned long> muting1_sub1_;
+  std::vector<unsigned long> muting2_sub1_;
+  std::vector<unsigned long> safety1_sub2_;
+  std::vector<unsigned long> safety2_sub2_;
+  std::vector<unsigned long> safety3_sub2_;
+  std::vector<unsigned long> warn1_sub2_;
+  std::vector<unsigned long> warn2_sub2_;
+  std::vector<unsigned long> muting1_sub2_;
+  std::vector<unsigned long> muting2_sub2_;
 
   //! Distance of angle between the distance values given in safety1_, safety2_, safety3_, warn1_, warn2_, muting1_,
   //! muting2_.

@@ -118,31 +118,31 @@ ZoneSet parseZoneSetSub0(const tinyxml2::XMLElement* xml_set_element, ZoneSet se
 
     if (textIsEqual(xml_set_detail_type_element, "roOSSD1"))
     {
-      set.safety1_Sub0_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.safety1_sub0_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "roOSSD2"))
     {
-      set.safety2_Sub0_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.safety2_sub0_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "roOSSD3"))
     {
-      set.safety3_Sub0_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.safety3_sub0_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "warn1"))
     {
-      set.warn1_Sub0_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.warn1_sub0_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "warn2"))
     {
-      set.warn2_Sub0_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.warn2_sub0_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "muting1"))
     {
-      set.muting1_Sub0_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.muting1_sub0_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "muting2"))
     {
-      set.muting2_Sub0_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.muting2_sub0_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else
     {
@@ -170,31 +170,31 @@ ZoneSet parseZoneSetSub1(const tinyxml2::XMLElement* xml_set_element, ZoneSet se
 
     if (textIsEqual(xml_set_detail_type_element, "roOSSD1"))
     {
-      set.safety1_Sub1_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.safety1_sub1_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "roOSSD2"))
     {
-      set.safety2_Sub1_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.safety2_sub1_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "roOSSD3"))
     {
-      set.safety3_Sub1_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.safety3_sub1_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "warn1"))
     {
-      set.warn1_Sub1_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.warn1_sub1_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "warn2"))
     {
-      set.warn2_Sub1_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.warn2_sub1_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "muting1"))
     {
-      set.muting1_Sub1_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.muting1_sub1_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "muting2"))
     {
-      set.muting2_Sub1_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.muting2_sub1_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else
     {
@@ -222,31 +222,31 @@ ZoneSet parseZoneSetSub2(const tinyxml2::XMLElement* xml_set_element, ZoneSet se
 
     if (textIsEqual(xml_set_detail_type_element, "roOSSD1"))
     {
-      set.safety1_Sub2_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.safety1_sub2_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "roOSSD2"))
     {
-      set.safety2_Sub2_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.safety2_sub2_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "roOSSD3"))
     {
-      set.safety3_Sub2_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.safety3_sub2_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "warn1"))
     {
-      set.warn1_Sub2_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.warn1_sub2_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "warn2"))
     {
-      set.warn2_Sub2_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.warn2_sub2_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "muting1"))
     {
-      set.muting1_Sub2_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.muting1_sub2_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else if (textIsEqual(xml_set_detail_type_element, "muting2"))
     {
-      set.muting2_Sub2_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
+      set.muting2_sub2_ = ro_string_to_vec(getText(xml_set_detail_ro_element));
     }
     else
     {
