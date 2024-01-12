@@ -30,7 +30,7 @@ ConfigServerNode::ConfigServerNode(const rclcpp::Node::SharedPtr& node, const ch
   try
   {
     auto zoneconfig = configuration::xml_config_parsing::parseFile(config_file_path);
-    zoneset_pub_ = node->create_publisher<psen_scan_v2::msg::ZoneSetConfiguration>(DEFAULT_ZONESET_TOPIC, 1);
+    zoneset_pub_ = node_->create_publisher<psen_scan_v2::msg::ZoneSetConfiguration>(DEFAULT_ZONESET_TOPIC, 1);
 
     // ROS_WARN_STREAM_NAMED(
     //     "ConfigurationServer",
@@ -46,7 +46,7 @@ ConfigServerNode::ConfigServerNode(const rclcpp::Node::SharedPtr& node, const ch
   // LCOV_EXCL_START
   catch (const configuration::xml_config_parsing::XMLConfigurationParserException& e)
   {
-    RCLCPP_ERROR_STREAM(node->get_logger(), e.what());
+    RCLCPP_ERROR_STREAM(node_->get_logger(), e.what());
   }
   // LCOV_EXCL_STOP
 }

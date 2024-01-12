@@ -28,6 +28,7 @@
 #include <gtest/gtest_prod.h>
 
 #include <rclcpp/rclcpp.hpp>
+#include <std_msgs/msg/u_int8.hpp>
 #include <sensor_msgs/msg/laser_scan.hpp>
 
 #include "psen_scan_v2_standalone/scanner_v2.h"
@@ -80,6 +81,7 @@ private:
 private:
   rclcpp::Node::SharedPtr node_;
   rclcpp::Publisher<sensor_msgs::msg::LaserScan>::SharedPtr pub_scan_;
+  rclcpp::Publisher<std_msgs::msg::UInt8>::SharedPtr pub_zone_;
   rclcpp::Publisher<psen_scan_v2::msg::IOState>::SharedPtr pub_io_;
   std::string tf_prefix_;
   double x_axis_rotation_;
@@ -117,6 +119,7 @@ ROSScannerNodeT<S>::ROSScannerNodeT(const rclcpp::Node::SharedPtr& node,
   , scanner_(scanner_config, std::bind(&ROSScannerNodeT<S>::laserScanCallback, this, std::placeholders::_1))
 {
   pub_scan_ = node->create_publisher<sensor_msgs::msg::LaserScan>(tf_prefix_ + "/" + topic, 1);
+  pub_zone_ = node->create_publisher<std_msgs::msg::UInt8>("/active_zoneset", 1);
   pub_io_ = node->create_publisher<psen_scan_v2::msg::IOState>("/io_state", 6);
 }
 
@@ -134,6 +137,11 @@ void ROSScannerNodeT<S>::laserScanCallback(const LaserScan& scan)
         data_conversion_layer::radianToDegree(laser_scan_msg.angle_increment),
         laser_scan_msg.ranges.size());
     pub_scan_->publish(laser_scan_msg);
+
+    std_msgs::msg::UInt8 active_zoneset;
+    active_zoneset.data = scan.activeZoneset();
+    pub_zone_->publish(active_zoneset);
+
     publishChangedIOStates(scan.ioStates());
   }
   // LCOV_EXCL_START

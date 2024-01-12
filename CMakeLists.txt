@@ -181,6 +181,26 @@ ament_target_dependencies(config_server_node
   rclcpp
 )
 
+add_executable(active_zoneset_node
+  src/active_zoneset_node_main.cpp
+  src/active_zoneset_node.cpp
+)
+
+target_link_libraries(active_zoneset_node
+  fmt::fmt
+)
+
+target_include_directories(active_zoneset_node
+  PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
+ament_target_dependencies(active_zoneset_node
+  rclcpp
+  std_msgs
+  geometry_msgs
+)
 
 #############
 ## Install ##
@@ -200,6 +220,7 @@ install(TARGETS
   ${PROJECT_NAME}_node
   ${PROJECT_NAME}_standalone
   config_server_node
+  active_zoneset_node
   ${PROJECT_NAME}_standalone_xml_configuration_import
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
@@ -212,6 +233,9 @@ rosidl_target_interfaces(${PROJECT_NAME}_node
 rosidl_target_interfaces(config_server_node
   ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
+rosidl_target_interfaces(active_zoneset_node
+  ${PROJECT_NAME} "rosidl_typesupport_cpp")
+  
 ############
 ##  Test  ##
 ############

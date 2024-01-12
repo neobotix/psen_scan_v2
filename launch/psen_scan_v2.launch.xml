@@ -48,7 +48,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   <arg name="fragmented_scans" default="false" />
 
   <!-- Load scanner config file to publish zonesets -->
-  <arg name="config_file" default="/home/pilzcc/PSENscan/ROS2_development/v2_foxy_ws/src/psen_scan_v2/config/PSENscan_ME_and_S_10_ZoneSets 2.xml"/>
+  <arg name="config_file" default="/home/pilzcc/PSENscan/ROS2_development/v2_foxy_ws/src/psen_scan_v2/config/ROS_TEST_CONFIG.xml"/>
 
   <!-- Start rviz -->
   <arg name="rviz" default="true" />
@@ -69,7 +69,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
   <!-- Publish tf frames for the device -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" exec="robot_state_publisher">
-    <param name="robot_description" value="$(command 'xacro $(find-pkg-share psen_scan_v2)/urdf/main.urdf.xacro prefix:=$(var tf_prefix)')" />
+    <param name="robot_description" value="$(command 'xacro $(find-pkg-share psen_scan_v2)/urdf/add_scanner.urdf.xacro prefix:=$(var tf_prefix)')" />
   </node>
 
   <!-- Publish the defined zonesets from the xml configuration -->
@@ -77,6 +77,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     <param name="config_file" value="$(var config_file)" />
     <param name="frame_id" value="$(var tf_prefix)" />
   </node>
+
+  <!-- Visualize active zoneset -->
+  <node name="active_zoneset_node" exec="active_zoneset_node" pkg="psen_scan_v2" />
 
   <!-- Start rviz -->
   <group if="$(var rviz)">
