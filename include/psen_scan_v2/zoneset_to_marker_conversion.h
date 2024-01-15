@@ -146,7 +146,7 @@ std::vector<visualization_msgs::msg::Marker> toMarkers(const psen_scan_v2::msg::
     return_vec.push_back(TO_MARKER(zoneset, muting, 2, "laser_1"));
   }
 
-  // ZonsetMarkers Subscriber0
+  // ZonsetMarkers subscriber0
   if (!zoneset.safety1_sub0.points.empty())
   {
     return_vec.push_back(TO_MARKER(zoneset, safety, 1_sub0, "laser_1_subscriber0"));

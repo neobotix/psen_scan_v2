@@ -45,6 +45,7 @@ const std::string PARAM_ANGLE_START{ "angle_start" };
 const std::string PARAM_ANGLE_END{ "angle_end" };
 const std::string PARAM_X_AXIS_ROTATION{ "x_axis_rotation" };
 const std::string PARAM_FRAGMENTED_SCANS{ "fragmented_scans" };
+const std::string PARAM_NR_SUBSCRIBERS{ "nr_subscribers" };
 const std::string PARAM_INTENSITIES{ "intensities" };
 const std::string PARAM_RESOLUTION{ "resolution" };
 
@@ -90,6 +91,7 @@ int main(int argc, char** argv)
           .enableDiagnostics()
           .enableFragmentedScans(
               getOptionalParamFromServer<bool>(*node, PARAM_FRAGMENTED_SCANS, configuration::FRAGMENTED_SCANS))
+          .nrSubscribers(getOptionalParamFromServer<int>(*node, PARAM_NR_SUBSCRIBERS, configuration::NR_SUBSCRIBERS))
           .enableIntensities(getOptionalParamFromServer<bool>(*node, PARAM_INTENSITIES, configuration::INTENSITIES))
           .scanResolution(util::TenthOfDegree::fromRad(
               getOptionalParamFromServer<double>(*node, PARAM_RESOLUTION, configuration::DEFAULT_SCAN_ANGLE_RESOLUTION)))

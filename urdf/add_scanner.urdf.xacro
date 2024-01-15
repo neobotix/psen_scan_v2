@@ -4,9 +4,9 @@
   <!-- PSENscan arguments -->
   <xacro:arg name="nr_scanners" default="0"/>
   <xacro:arg name="prefix" default="laser_1"/>
-  <xacro:arg name="prefix_sub0" default="laser_1_Subscriber0"/>
-  <xacro:arg name="prefix_sub1" default="laser_1_Subscriber1"/> 
-  <xacro:arg name="prefix_sub2" default="laser_1_Subscriber2"/>
+  <xacro:arg name="prefix_sub0" default="laser_1_subscriber0"/>
+  <xacro:arg name="prefix_sub1" default="laser_1_subscriber1"/> 
+  <xacro:arg name="prefix_sub2" default="laser_1_subscriber2"/>
 
   <!-- Number of Subscribers -->
   <xacro:property name="nr_sub" value="$(arg nr_scanners)"/>
@@ -20,7 +20,7 @@
     <origin xyz="0.5 0 0" rpy="0 0 0" />
   </xacro:psen_scan>
 
-  <!-- PSENscan Subscriber0 -->
+  <!-- PSENscan subscriber0 -->
   <xacro:if value="${nr_sub >= 1}">
     <xacro:psen_scan prefix="$(arg prefix_sub0)" parent="reference_link">
       <origin xyz="-0.5 0 0" rpy="0 0 3.14" />

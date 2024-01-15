@@ -45,9 +45,9 @@ static inline ScannerId subscriber_number_to_scanner_id(uint8_t nr)
 }
 
 static const std::map<ScannerId, std::string> SCANNER_ID_TO_STRING{ { ScannerId::master, "Master" },
-                                                                    { ScannerId::subscriber0, "Subscriber0" },
-                                                                    { ScannerId::subscriber1, "Subscriber1" },
-                                                                    { ScannerId::subscriber2, "Subscriber2" } };
+                                                                    { ScannerId::subscriber0, "subscriber0" },
+                                                                    { ScannerId::subscriber1, "subscriber1" },
+                                                                    { ScannerId::subscriber2, "subscriber2" } };
 
 }  // namespace configuration
 }  // namespace psen_scan_v2_standalone

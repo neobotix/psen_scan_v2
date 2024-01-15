@@ -131,7 +131,7 @@ inline ZoneSetMsgBuilder& ZoneSetMsgBuilder::muting2(const geometry_msgs::msg::P
   return *this;
 }
 
-// ZoneSetMsgBuilder Subscriber0
+// ZoneSetMsgBuilder subscriber0
 inline ZoneSetMsgBuilder& ZoneSetMsgBuilder::safety1_sub0(const geometry_msgs::msg::Polygon& safety1_sub0)
 {
   zoneset_msg_.safety1_sub0 = safety1_sub0;
