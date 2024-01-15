@@ -32,15 +32,14 @@ ConfigServerNode::ConfigServerNode(const rclcpp::Node::SharedPtr& node, const ch
     auto zoneconfig = configuration::xml_config_parsing::parseFile(config_file_path);
     zoneset_pub_ = node_->create_publisher<psen_scan_v2::msg::ZoneSetConfiguration>(DEFAULT_ZONESET_TOPIC, 1);
 
-    // ROS_WARN_STREAM_NAMED(
-    //     "ConfigurationServer",
-    //     "The configuration server doesn't verfiy that the provided configuration file matches the one on the connected "
-    //     "device! "
-    //     "Mismatching configurations can amongst other things lead to confusing errors in navigation and misleading "
-    //     "visualization. "
-    //     "You are using \"" +
-    //         std::string(config_file_path) + "\" please make sure that is the one you intented to use.");
-
+    RCLCPP_WARN_STREAM_ONCE(node_->get_logger(),
+        "The configuration server doesn't verfiy that the provided configuration file matches the one on the connected "
+        "device! "
+        "Mismatching configurations can amongst other things lead to confusing errors in navigation and misleading "
+        "visualization. "
+        "You are using \"" +
+            std::string(config_file_path) + "\" please make sure that is the one you intented to use.");
+    
     zoneset_pub_->publish(toRosMsg(zoneconfig, frame_id));
   }
   // LCOV_EXCL_START

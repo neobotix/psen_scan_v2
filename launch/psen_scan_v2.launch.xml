@@ -54,6 +54,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   <arg name="fragmented_scans" default="false" />
 
   <!-- Load scanner config file to publish zonesets -->
+  <arg name="zones_visualization" default="true" />
   <arg name="config_file" default="/home/pilzcc/PSENscan/ROS2_development/v2_foxy_ws/src/psen_scan_v2/config/PSENscan_ME_and_S_10_ZoneSets.xml"/>
 
   <!-- Start rviz -->
@@ -85,18 +86,22 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     </param>
   </node>
 
-  <!-- Publish the defined zonesets from the xml configuration -->
-  <node name="config_server_node" exec="config_server_node" pkg="psen_scan_v2">
-    <param name="config_file" value="$(var config_file)" />
-    <param name="frame_id" value="$(var tf_prefix)" />
-  </node>
-
   <!-- Visualize active zoneset -->
-  <node name="active_zoneset_node" exec="active_zoneset_node" pkg="psen_scan_v2" />
+  <group if="$(var zones_visualization)">
+    <node name="active_zoneset_node" exec="active_zoneset_node" pkg="psen_scan_v2" />
+  </group>
 
   <!-- Start rviz -->
   <group if="$(var rviz)">
     <node name="rviz2" exec="rviz2" pkg="rviz2" args="-d $(find-pkg-share psen_scan_v2)/config/config.rviz" />
+  </group>
+
+  <!-- Publish the defined zonesets from the xml configuration -->
+  <group if="$(var zones_visualization)">
+    <node name="config_server_node" exec="config_server_node" pkg="psen_scan_v2">
+      <param name="config_file" value="$(var config_file)" />
+      <param name="frame_id" value="$(var tf_prefix)" />
+    </node>
   </group>
 
 </launch>
