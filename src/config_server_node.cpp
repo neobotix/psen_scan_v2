@@ -30,7 +30,7 @@ ConfigServerNode::ConfigServerNode(const rclcpp::Node::SharedPtr& node, const ch
   try
   {
     auto zoneconfig = configuration::xml_config_parsing::parseFile(config_file_path);
-    zoneset_pub_ = node_->create_publisher<psen_scan_v2::msg::ZoneSetConfiguration>(DEFAULT_ZONESET_TOPIC, 1);
+    zoneset_pub_ = node_->create_publisher<psen_scan_v2::msg::ZoneSetConfiguration>(DEFAULT_ZONESET_TOPIC, rclcpp::QoS(10).transient_local());
 
     RCLCPP_WARN_STREAM_ONCE(node_->get_logger(),
         "The configuration server doesn't verfiy that the provided configuration file matches the one on the connected "

@@ -33,7 +33,7 @@ namespace psen_scan_v2
 ActiveZonesetNode::ActiveZonesetNode(const rclcpp::Node::SharedPtr& node) : node_(node)
 {
   zoneset_subscriber_ = node_->create_subscription<psen_scan_v2::msg::ZoneSetConfiguration>(
-        DEFAULT_ZONECONFIGURATION_TOPIC, 2, std::bind(&ActiveZonesetNode::zonesetCallback, this, std::placeholders::_1));
+        DEFAULT_ZONECONFIGURATION_TOPIC, rclcpp::QoS(10).transient_local(), std::bind(&ActiveZonesetNode::zonesetCallback, this, std::placeholders::_1));
 
   active_zoneset_subscriber_ = node_->create_subscription<std_msgs::msg::UInt8>(
         DEFAULT_ACTIVE_ZONESET_TOPIC, 10, std::bind(&ActiveZonesetNode::activeZonesetCallback, this, std::placeholders::_1));
