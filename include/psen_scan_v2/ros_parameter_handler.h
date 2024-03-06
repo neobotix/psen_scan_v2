@@ -33,6 +33,7 @@ template <class T>
 T getOptionalParamFromServer(const rclcpp::Node& node, const std::string& key, const T& default_value)
 {
   T ret_val{};
+
   if (!node.get_parameter_or(key, ret_val, default_value))
   {
     RCLCPP_WARN_STREAM(node.get_logger(), "Parameter " + key + " doesn't exist for node " + node.get_name() + ".");

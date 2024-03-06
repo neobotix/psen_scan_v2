@@ -21,7 +21,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   <arg name="sensor_ip" default="192.168.0.10" />
 
     <!-- How many subscribers are connected to the master scanner, 0 ... 3 are supported. -->
-  <arg name="nr_subscribers" default="0" />
+  <arg name="nr_subscribers" default="1" />
 
   <!-- Name of the scanner (required to run multiple scanners) which by convention
        is the prefix for the urdf description. -->
@@ -43,10 +43,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   <arg name="host_ip" default="auto" />
 
   <!-- UDP Port on which monitoring frames (scans) should be received -->
-  <arg name="host_udp_port_data" default="55115" />
+  <arg name="host_udp_port_data" default="6060" />
 
   <!-- UDP Port used to send commands (start/stop) and receive the corresponding replies -->
-  <arg name="host_udp_port_control" default="55116" />
+  <arg name="host_udp_port_control" default="3000" />
 
   <!-- Set the following to true in order to publish scan data as soon as a UDP packet is ready, instead of waiting for a full scan -->
   <arg name="fragmented_scans" default="false" />

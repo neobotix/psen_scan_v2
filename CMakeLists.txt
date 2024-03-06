@@ -16,7 +16,7 @@
 cmake_minimum_required(VERSION 3.7)
 project(psen_scan_v2)
 
-add_compile_options(-std=c++14)
+add_compile_options(-std=c++17)
 add_compile_options(-Wall)
 add_compile_options(-Wextra)
 add_compile_options(-Wno-unused-parameter)

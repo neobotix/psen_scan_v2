@@ -104,8 +104,8 @@ int main(int argc, char** argv)
     }
 
     ROSScannerNode ros_scanner_node(node,
-                                    DEFAULT_PUBLISH_TOPIC,
-                                    getOptionalParamFromServer<std::string>(*node, PARAM_TF_PREFIX, DEFAULT_TF_PREFIX),
+                                    "scan_filtered",
+                                    "lidar",
                                     DEFAULT_X_AXIS_ROTATION,
                                     scanner_configuration);
 

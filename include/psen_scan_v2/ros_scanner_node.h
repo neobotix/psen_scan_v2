@@ -119,16 +119,16 @@ ROSScannerNodeT<S>::ROSScannerNodeT(const rclcpp::Node::SharedPtr& node,
   , x_axis_rotation_(x_axis_rotation)
   , scanner_(scanner_config, std::bind(&ROSScannerNodeT<S>::laserScanCallback, this, std::placeholders::_1))
 {
-  pubs_scan_.insert(std::make_pair(ScannerId::master, node_->create_publisher<sensor_msgs::msg::LaserScan>(tf_prefix + "/" + topic, 1)));
-  tf_prefixes_.insert(std::make_pair(ScannerId::master, tf_prefix));
+  pubs_scan_.insert(std::make_pair(ScannerId::master, node_->create_publisher<sensor_msgs::msg::LaserScan>(tf_prefix + "_" + std::to_string(1) + "/" + topic, 1)));
+  tf_prefixes_.insert(std::make_pair(ScannerId::master, tf_prefix + "_" + std::to_string(1) + "_link"));
   for (int i = 0; i < scanner_config.nrSubscribers(); i++)
   {
     ScannerId id = psen_scan_v2_standalone::configuration::subscriber_number_to_scanner_id(i);
     std::string topic_subscriber = topic + "_" + psen_scan_v2_standalone::configuration::SCANNER_ID_TO_STRING.at(id);
-    pubs_scan_.insert(std::make_pair(id, node_->create_publisher<sensor_msgs::msg::LaserScan>(tf_prefix + "/" + topic_subscriber, 1)));
+    pubs_scan_.insert(std::make_pair(id, node_->create_publisher<sensor_msgs::msg::LaserScan>(tf_prefix + "_" + std::to_string(i+2) + "/" + topic, 1)));
     std::string tf_prefix_subscriber =
         tf_prefix + "_" + psen_scan_v2_standalone::configuration::SCANNER_ID_TO_STRING.at(id);
-    tf_prefixes_.insert(std::make_pair(id, tf_prefix_subscriber));
+    tf_prefixes_.insert(std::make_pair(id, tf_prefix + "_" + std::to_string(i+2) + "_link"));
   }
   pub_zone_ = node->create_publisher<std_msgs::msg::UInt8>("/active_zoneset", 1);
   pub_io_ = node->create_publisher<psen_scan_v2::msg::IOState>("/io_state", 6);
